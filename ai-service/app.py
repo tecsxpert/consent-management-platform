@@ -1,10 +1,18 @@
 from flask import Flask
 from routes.test_route import test_bp
+from routes.describe_route import describe_bp
 
 app = Flask(__name__)
 
 # register blueprint
 app.register_blueprint(test_bp)
+
+@app.route("/health")
+def health():
+    return {"status": "ok"}
+
+
+app.register_blueprint(describe_bp)
 
 @app.route("/")
 def home():
