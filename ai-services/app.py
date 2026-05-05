@@ -1,18 +1,32 @@
 from flask import Flask
 from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
-# Step 1: Create app
+from routes.test_routes import test_bp
+
 app = Flask(__name__)
 
-# Step 2: Setup limiter
-limiter = Limiter(key_func=lambda: "global")
+# Rate limiter
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["30 per minute"]
+)
 
-# Step 3: Attach limiter
-limiter.init_app(app)
+# Register routes
+app.register_blueprint(test_bp)
+
+# Security headers
+@app.after_request
+def add_security_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    return response
 
 @app.route("/")
 def home():
-    return "API running"
+    return {"status": "AI Service Running Securely"}
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

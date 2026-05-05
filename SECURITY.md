@@ -1,26 +1,64 @@
 # SECURITY.md
 
-## 1. SQL Injection
-Attack: Malicious SQL input  
-Impact: Data leakage  
-Mitigation: Input validation and parameterized queries  
+## Overview
+This document outlines security measures implemented in the AI service.
 
-## 2. Cross-Site Scripting (XSS)
-Attack: Inject scripts  
-Impact: Steal user data  
-Mitigation: Input sanitisation  
+---
 
-## 3. Broken Authentication
-Attack: Unauthorized access  
-Impact: Data misuse  
-Mitigation: JWT authentication  
+## 1. Input Sanitization
+Attack: XSS / Prompt Injection  
+Impact: Malicious AI output  
+Mitigation: HTML stripping and pattern detection  
 
-## 4. Rate Limiting Failure
-Attack: Too many requests  
-Impact: Server crash  
-Mitigation: flask-limiter  
+---
 
-## 5. Prompt Injection
-Attack: Manipulate AI prompts  
-Impact: Wrong AI output  
-Mitigation: Input filtering
+## 2. Rate Limiting
+Attack: API abuse / DoS  
+Impact: Service crash  
+Mitigation: 30 req/min default, 10 req/min critical endpoints  
+
+---
+
+## 3. Prompt Injection Protection
+Attack: Manipulating AI prompts  
+Impact: Unsafe or incorrect output  
+Mitigation: Pattern filtering and validation  
+
+---
+
+## 4. Security Headers
+Headers added:
+- X-Content-Type-Options
+- X-Frame-Options
+- X-XSS-Protection  
+
+---
+
+## 5. API Error Handling
+All errors return safe responses (no stack traces)
+
+---
+
+## 6. Security Testing
+Tool used: OWASP ZAP  
+
+Tests performed:
+- Injection attempts
+- Rate limit validation
+- Invalid inputs  
+
+---
+
+## 7. PII Protection
+No personal data stored or logged  
+
+---
+
+## 8. Residual Risks
+- AI model unpredictability
+- External API dependency  
+
+---
+
+## 9. Final Status
+All critical and high vulnerabilities resolved.
