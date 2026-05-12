@@ -94,3 +94,9 @@ def test_invalid_endpoint(client):
     response = client.get("/invalid-route")
 
     assert response.status_code == 404
+
+def test_batch_missing_items(client):
+
+    response = client.post("/batch-process", json={})
+
+    assert response.status_code == 400

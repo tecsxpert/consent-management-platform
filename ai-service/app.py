@@ -1,5 +1,5 @@
 from flask import Flask
-
+from routes.batch_route import batch_bp
 from routes.describe_route import describe_bp
 from routes.recommend_route import recommend_bp
 from routes.report_route import report_bp
@@ -8,6 +8,7 @@ from routes.analyse_route import analyse_bp
 app = Flask(__name__)
 
 # Register blueprints
+app.register_blueprint(batch_bp)
 app.register_blueprint(describe_bp)
 app.register_blueprint(recommend_bp)
 app.register_blueprint(report_bp)
