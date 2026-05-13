@@ -1,0 +1,1 @@
+Encryption protects personal information during storage and transmission by preventing unauthorized access.

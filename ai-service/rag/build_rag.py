@@ -1,9 +1,10 @@
 import os
 import chromadb
 from sentence_transformers import SentenceTransformer
+from services.embedding_service import get_embedding
 
 # Load embedding model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+
 
 # Create ChromaDB client
 client = chromadb.PersistentClient(path="./chroma_db")
@@ -44,7 +45,7 @@ for filename in os.listdir(DOCS_FOLDER):
 
         for i, chunk in enumerate(chunks):
 
-            embedding = model.encode(chunk).tolist()
+            embedding = get_embedding(chunk)
 
             collection.add(
                 documents=[chunk],

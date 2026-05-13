@@ -1,0 +1,1 @@
+Healthcare information is highly sensitive and should be protected through encryption, strict access control, and compliance policies.
