@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"; // Added for Day 11 feedback
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -11,15 +12,22 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault(); 
     setError("");
 
+    // Simple validation logic
     if (username && password) {
       const fakeToken = "jwt-token-demo";
       login(fakeToken);
-      navigate("/dashboard");
+      
+      // SUCCESS FEEDBACK
+      toast.success(`Welcome back, ${username}`);
+      
+      // REDIRECT TO LIST instead of Dashboard
+      navigate("/list");
     } else {
       setError("Please enter valid credentials to access the system.");
+      toast.error("Login failed");
     }
   };
 
@@ -120,7 +128,7 @@ export default function LoginPage() {
             onMouseOver={(e) => e.target.style.backgroundColor = '#2563eb'}
             onMouseOut={(e) => e.target.style.backgroundColor = '#1B4F8A'}
           >
-            Access Dashboard
+            Access Audit System
           </button>
         </form>
 
