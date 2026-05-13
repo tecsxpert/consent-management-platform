@@ -1,0 +1,11 @@
+Privacy Policy
+
+This platform collects user information including name, email address, phone number, and device information for authentication, analytics, and service improvement purposes.
+
+User data may be shared with trusted third-party vendors for analytics, cloud storage, and system monitoring. Sensitive personal information is encrypted during storage and transmission.
+
+The platform may use cookies and tracking technologies to improve user experience and personalize services. Users may manage cookie preferences through browser settings.
+
+Collected data may be retained for operational, legal, and security purposes. Users have the right to request access, correction, or deletion of their personal data according to applicable privacy laws.
+
+The company reserves the right to update this privacy policy periodically. Continued use of the platform indicates acceptance of updated policies.
