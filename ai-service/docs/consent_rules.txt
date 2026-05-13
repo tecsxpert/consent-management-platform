@@ -1,0 +1,13 @@
+Consent Management Rules
+
+Users must provide explicit consent before personal data is collected or processed. Consent requests must clearly explain what data is being collected and how it will be used.
+
+Users should be able to withdraw consent at any time through accessible account settings or support channels. Withdrawal of consent must stop future data processing activities unless legally required otherwise.
+
+Sensitive information such as financial data, biometric data, health records, and government identification numbers requires higher protection standards and additional user confirmation.
+
+Third-party data sharing must be disclosed clearly in consent agreements. Users should be informed about external partners receiving their data and the purpose of such sharing.
+
+Consent records must be securely stored for audit and compliance purposes. The platform should maintain timestamps and logs for all consent actions performed by users.
+
+The platform should regularly review and update consent policies to remain compliant with privacy regulations and industry standards.
