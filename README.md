@@ -19,7 +19,7 @@ Built using:
 
 - Flask
 - Groq API
-- Sentence Transformers
+- sentence-transformers
 - ChromaDB
 
 ---
@@ -52,265 +52,54 @@ ai-service/
 ├── tests/
 ├── app.py
 ├── requirements.txt
+├── Dockerfile
 └── README.md
 ```
 
----
+Technologies Used
+Flask
+Groq API
+ChromaDB
+sentence-transformers
+Pytest
+Python
 
-# Prerequisites
+Performance Optimizations
+Implemented optimizations:
 
-Install:
+preloaded SentenceTransformer model at startup
 
-- Python 3.10+
-- pip
+reused embedding model globally
 
----
+reduced prompt verbosity
 
-# Setup Instructions
+modular AI service architecture
 
-## 1. Clone repository
+Future improvements:
 
-```bash
-git clone https://github.com/Sourabhpdnker/consent-management-platform.git
-```
+Redis caching
 
----
+async processing
 
-## 2. Navigate to AI service
+SSE streaming
 
-```bash
-cd consent-management-platform/ai-service
-```
+background workers
 
----
+rate limiting
 
-## 3. Create virtual environment
+Production Notes
+Recommended future improvements:
 
-```bash
-python3 -m venv .venv
-```
+authentication and authorization
 
----
+Docker Compose deployment
 
-## 4. Activate virtual environment
+Kubernetes support
 
-### macOS/Linux
+centralized logging
 
-```bash
-source .venv/bin/activate
-```
+monitoring dashboards
 
-### Windows
+Contributor
 
-```bash
-.venv\Scripts\activate
-```
-
----
-
-## 5. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# Environment Variables
-
-Create:
-
-```text
-.env
-```
-
-Add:
-
-```env
-GROQ_API_KEY=your_api_key_here
-```
-
----
-
-# Run Application
-
-```bash
-python3 app.py
-```
-
-Server runs on:
-
-```text
-http://localhost:5001
-```
-
----
-
-# API Reference
-
----
-
-## Health Check
-
-### GET `/health`
-
-### Response
-
-```json
-{
-  "status": "ok"
-}
-```
-
----
-
-## Describe Endpoint
-
-### POST `/describe`
-
-### Request
-
-```json
-{
-  "text": "We collect user data for analytics."
-}
-```
-
-### Response
-
-```json
-{
-  "description": "Professional AI-generated description",
-  "generated_at": "timestamp"
-}
-```
-
----
-
-## Recommend Endpoint
-
-### POST `/recommend`
-
-### Request
-
-```json
-{
-  "text": "Cookies are used for tracking."
-}
-```
-
-### Response
-
-```json
-{
-  "recommendations": [
-    {
-      "action_type": "review",
-      "description": "Review cookie policy",
-      "priority": "high"
-    }
-  ]
-}
-```
-
----
-
-## Generate Report Endpoint
-
-### POST `/generate-report`
-
-### Response
-
-```json
-{
-  "title": "Privacy Report",
-  "executive_summary": "...",
-  "overview": "...",
-  "top_items": [],
-  "recommendations": []
-}
-```
-
----
-
-## Analyse Document Endpoint
-
-### POST `/analyse-document`
-
-### Response
-
-```json
-{
-  "findings": [
-    {
-      "type": "risk",
-      "description": "Third-party sharing detected",
-      "severity": "high"
-    }
-  ]
-}
-```
-
----
-
-## Batch Process Endpoint
-
-### POST `/batch-process`
-
-### Request
-
-```json
-{
-  "items": ["Text 1", "Text 2"]
-}
-```
-
-### Response
-
-```json
-{
-  "results": [],
-  "processed_count": 2
-}
-```
-
----
-
-# Running Tests
-
-```bash
-python3 -m pytest
-```
-
----
-
-# RAG Pipeline
-
-The project includes:
-
-- document chunking
-- embeddings generation
-- ChromaDB vector storage
-- semantic retrieval
-
-To build RAG database:
-
-```bash
-python3 rag/build_rag.py
-```
-
----
-
-# Technologies Used
-
-- Flask
-- Groq API
-- ChromaDB
-- Sentence Transformers
-- Pytest
-
----
-
-# Contributors
-
-AI Developer 1 — Sourabh Pedanekar
+Sourabh Pedanekar — AI Developer 1
