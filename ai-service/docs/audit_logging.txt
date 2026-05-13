@@ -1,0 +1,1 @@
+Audit logs help organizations monitor system activity, investigate incidents, and maintain compliance records.

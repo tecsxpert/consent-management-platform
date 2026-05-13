@@ -1,0 +1,1 @@
+Biometric data such as fingerprints and facial recognition information requires strong protection due to its sensitive nature.
