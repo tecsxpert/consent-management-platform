@@ -17,34 +17,60 @@ const [totalPages, setTotalPages] = useState(0);
 const [sortField, setSortField] = useState("id");
 const [sortDir, setSortDir] = useState("asc");
 
-  // Runs once when the component is mounted
-  useEffect(() => {
+ useEffect(() => {
 
-    // Call the backend API to fetch all records
-    api.get("/all")
+  setLoading(true);
 
-      .then((res) => {
-        // Logs response for debugging purposes
-        console.log("API Response:", res.data);
+  api.get(
+    `/all?page=${page}&size=5&sort=${sortField},${sortDir}`
+  )
 
-        // Handles both paginated and non-paginated responses
-        setData(res.data.content || res.data);
-      })
+    .then((res) => {
 
-      .catch((err) => {
-        // Logs error in console for debugging
-        console.error("API Error:", err);
+      console.log("API Response:", res.data);
 
-        // Sets error message to display in UI
-        setError("Failed to fetch data");
-      })
+      setData(res.data.content);
 
-      .finally(() => {
-        // Stops loading once API call is complete
-        setLoading(false);
-      });
+      setTotalPages(res.data.totalPages);
 
-  }, []);
+    })
+
+    .catch((err) => {
+
+  console.error("API Error:", err);
+
+  // Mock data for frontend testing
+  setData([
+    {
+      id: 1,
+      name: "Spoorthi",
+      status: "Approved",
+    },
+    {
+      id: 2,
+      name: "Rahul",
+      status: "Pending",
+    },
+    {
+      id: 3,
+      name: "Ananya",
+      status: "Rejected",
+    },
+  ]);
+
+  setTotalPages(3);
+
+})
+
+    .finally(() => {
+
+      setLoading(false);
+
+    });
+
+}, [page, sortField, sortDir]);
+
+      
 
   // If an error occurs, display error message
   if (error) {
@@ -76,7 +102,22 @@ const [sortDir, setSortDir] = useState("asc");
       </div>
     );
   }
+const handleSort = (field) => {
 
+  // If same field clicked → toggle direction
+  if (field === sortField) {
+
+    setSortDir(sortDir === "asc" ? "desc" : "asc");
+
+  } else {
+
+    // New field → default ascending
+    setSortField(field);
+    setSortDir("asc");
+
+  }
+
+};
   // Render table when data is available
   return (
     <div className="p-4">
@@ -85,9 +126,26 @@ const [sortDir, setSortDir] = useState("asc");
       <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-gray-100">
-            <th className="p-2">ID</th>
-            <th className="p-2">Name</th>
-            <th className="p-2">Status</th>
+            <th
+  className="p-2 cursor-pointer"
+  onClick={() => handleSort("id")}
+>
+  ID
+</th>
+
+<th
+  className="p-2 cursor-pointer"
+  onClick={() => handleSort("name")}
+>
+  Name
+</th>
+
+<th
+  className="p-2 cursor-pointer"
+  onClick={() => handleSort("status")}
+>
+  Status
+</th>
           </tr>
         </thead>
 
@@ -102,6 +160,33 @@ const [sortDir, setSortDir] = useState("asc");
           ))}
         </tbody>
       </table>
+
+{/* Pagination Controls */}
+<div className="flex justify-center gap-4 mt-4">
+
+  <button
+    onClick={() => setPage(page - 1)}
+    disabled={page === 0}
+    className="px-3 py-1 bg-gray-300 rounded"
+  >
+    Prev
+  </button>
+
+  <span>
+    Page {page + 1} of {totalPages}
+  </span>
+
+  <button
+    onClick={() => setPage(page + 1)}
+    disabled={page === totalPages - 1}
+    className="px-3 py-1 bg-gray-300 rounded"
+  >
+    Next
+  </button>
+
+</div>
+
+
     </div>
   );
 }
